@@ -17,6 +17,7 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
   const [inicioTarefa, setInicioTarefa] = useState('');
   const [fimTarefa, setFimTarefa] = useState('');
   const [recursoTarefa, setRecursoTarefa] = useState('');
+  const [prioridadeTarefa, setPrioridadeTarefa] = useState('');
   const [statusTarefa, setStatusTarefa] = useState('');
   
   useEffect(() => {
@@ -29,6 +30,10 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
     setRecursoTarefa(event.target.value);
   };
 
+  const handlePrioridade = (event) => {
+    setPrioridadeTarefa(event.target.value);
+  };
+
   const handleStatus = (event) => {
     setStatusTarefa(event.target.value);
   };
@@ -36,7 +41,7 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
   const handleSalvar = () => {
     //Para inspecionarmos nosso código, uma boa estratégia é utilizarmos o console.log.
     //  Com o console.log, podemos visualizar o seu conteúdo na aba Console, no inspecionador de elementos, na janela do navegador
-    console.log(`id: ${idTarefa} \n titulo: ${tituloTarefa} \n descrição: ${descricaoTarefa} \n inicio: ${inicioTarefa} \n fim: ${fimTarefa} \n recurso: ${recursoTarefa} \n status: ${statusTarefa}`);
+    console.log(`id: ${idTarefa} \n titulo: ${tituloTarefa} \n descrição: ${descricaoTarefa} \n inicio: ${inicioTarefa} \n fim: ${fimTarefa} \n recurso: ${recursoTarefa} \n recurso: ${prioridadeTarefa} \n status: ${statusTarefa}`);
 
     setTarefas(
       [...tarefas, 
@@ -47,6 +52,7 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
           inicioTarefa,
           fimTarefa,
           recursoTarefa,
+          prioridadeTarefa,
           statusTarefa
         }
       ]);
@@ -102,45 +108,68 @@ const CriarTarefa = ({handleClose, tarefas, setTarefas}) =>{
                 <FormHelperText id="tarefa_fim_helper_text">Fim da Tarefa.</FormHelperText>
               </FormControl>
             </Grid>
-            <Grid item xs={3}>  
-              <FormControl fullWidth>
-                <InputLabel htmlFor="tarefa_recurso">Recurso</InputLabel>
-                <Select
-                  id="tarefa_recurso"
-                  value={recursoTarefa}
-                  label="Recurso"
-                  onChange={handleRecurso}
-                  size="small"
-                  sx={{
-                    color:'rgba(0, 0, 0, 0.6)',
-                    fontWeight: 400,
-                  }} 
-                >
-                  <MenuItem value={'Recurso 1'}>Recurso 1</MenuItem>
-                  <MenuItem value={'Recurso 2'}>Recurso 2</MenuItem>
-                  <MenuItem value={'Recurso 3'}>Recurso 3</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>  
-              <FormControl fullWidth>
-                <InputLabel htmlFor="tarefa_recurso">Status</InputLabel>
-                <Select
-                  id="tarefa_status"
-                  value={statusTarefa}
-                  label="Status"
-                  onChange={handleStatus}
-                  size="small"
-                  sx={{
-                    color:'rgba(0, 0, 0, 0.6)',
-                    fontWeight: 400,
-                  }} 
-                >
-                  <MenuItem value={'Aguardando'}>Aguardando</MenuItem>
-                  <MenuItem value={'Em Andamento'}>Em Andamento</MenuItem>
-                  <MenuItem value={'Concluída'}>Concluída</MenuItem>
-                </Select>
-              </FormControl>
+            <Grid container spacing={2} mt={1}>
+              <Grid item xs={3}>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="tarefa_recurso">Recurso</InputLabel>
+                  <Select
+                    id="tarefa_recurso"
+                    value={recursoTarefa}
+                    label="Recurso"
+                    onChange={handleRecurso}
+                    size="small"
+                    sx={{
+                      color:'rgba(0, 0, 0, 0.6)',
+                      fontWeight: 400,
+                    }}
+                  >
+                    <MenuItem value={'Recurso 1'}>Recurso 1</MenuItem>
+                    <MenuItem value={'Recurso 2'}>Recurso 2</MenuItem>
+                    <MenuItem value={'Recurso 3'}>Recurso 3</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="tarefa_prioridade">Prioridade</InputLabel>
+                  <Select
+                    id="tarefa_prioridade"
+                    value={prioridadeTarefa}
+                    label="Prioridade"
+                    onChange={handlePrioridade}
+                    size="small"
+                    sx={{
+                      color:'rgba(0, 0, 0, 0.6)',
+                      fontWeight: 400,
+                    }}
+                  >
+                    <MenuItem value={'Urgente'}>Urgente</MenuItem>
+                    <MenuItem value={'Alta'}>Alta</MenuItem>
+                    <MenuItem value={'Normal'}>Normal</MenuItem>
+                    <MenuItem value={'Baixa'}>Baixa</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={3}>
+                <FormControl fullWidth>
+                  <InputLabel htmlFor="tarefa_status">Status</InputLabel>
+                  <Select
+                    id="tarefa_status"
+                    value={statusTarefa}
+                    label="Status"
+                    onChange={handleStatus}
+                    size="small"
+                    sx={{
+                      color:'rgba(0, 0, 0, 0.6)',
+                      fontWeight: 400,
+                    }}
+                  >
+                    <MenuItem value={'Aguardando'}>Aguardando</MenuItem>
+                    <MenuItem value={'Em Andamento'}>Em Andamento</MenuItem>
+                    <MenuItem value={'Concluída'}>Concluída</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
             <Grid container spacing={2} pl={2} mt={2}>
               <Grid item xs={1}>
